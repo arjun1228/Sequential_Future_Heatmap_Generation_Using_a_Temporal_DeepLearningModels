@@ -37,7 +37,7 @@ The training objective combines:
 
 | File | Description |
 | --- | --- |
-| [`Final_DeepLearning_Assignment.ipynb`](Final_DeepLearning_Assignment.ipynb) | Main notebook containing data download, preprocessing, heatmap generation, model construction, training, evaluation, and visualization. |
+| [`Final_DeepLearning_Assignment.ipynb`](Heatmap_Generation.ipynb) | Main notebook containing data download, preprocessing, heatmap generation, model construction, training, evaluation, and visualization. |
 | [`Heapmap_Generation.ipynb`](Heapmap_Generation.ipynb) | Additional notebook containing the heatmap-generation workflow and model experiments. |
 
 ## Requirements
@@ -59,7 +59,7 @@ The notebook installs or upgrades `yfinance` and `curl_cffi` in its setup cells.
 
 ### Option 1: Google Colab
 
-1. Open [`Final_DeepLearning_Assignment.ipynb`](Final_DeepLearning_Assignment.ipynb) in Google Colab.
+1. Open [`Final_DeepLearning_Assignment.ipynb`](Heatmap_Generation.ipynb) in Google Colab.
 2. Select a GPU runtime, preferably a T4 or equivalent.
 3. Run the package-installation cell.
 4. Restart the runtime if requested.

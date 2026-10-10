@@ -1,5 +1,7 @@
 # Sequential Future Heatmap Generation Using a Temporal Deep Learning Model
 
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/arjun1228/Sequential_Future_Heatmap_Generation_Using_a_Temporal_DeepLearningModels/blob/main/Heatmap_Generation.ipynb)
+
 A deep learning project that learns to predict the next financial-market heatmap from a sequence of historical heatmaps. The model combines a convolutional neural network (CNN) for spatial feature extraction, a gated recurrent unit (GRU) or long short-term memory (LSTM) network for temporal modeling, and a variational autoencoder (VAE) decoder for probabilistic image generation.
 
 ## Project Overview
@@ -16,6 +18,24 @@ The project uses daily stock returns from 64 NSE-listed companies organized into
 - Metals/Infrastructure
 
 For each trading day, the 64 returns are arranged into an 8 × 8 sector-ordered grid and rendered as a 64 × 64 RGB heatmap. A sequence of five historical heatmaps is used to predict the following day's heatmap.
+
+## How it works
+
+Input is 5 daily 64x64 RGB heatmaps. CNN extracts features from each. GRU learns market movement across 5 days. VAE compresses this into a 64-dimensional latent vector. Decoder generates the next day’s heatmap.
+
+Each 8x8 grid row is a sector (Banks, Financials, IT, Pharma, Auto, FMCG, Energy, Metals/Infra), each cell is a stock, red means loss, and green means gain.
+
+## Pipeline
+
+![Pipeline](images/linkedin_1_pipeline.png)
+
+## Sample Input Heatmaps
+
+![Sample Input Heatmaps](images/linkedin_2_input_heatmaps.png)
+
+## Training Curves
+
+![Training Curves](images/linkedin_3_training_curves.png)
 
 ## Model Architecture
 
@@ -37,8 +57,7 @@ The training objective combines:
 
 | File | Description |
 | --- | --- |
-| [`Final_DeepLearning_Assignment.ipynb`](Heatmap_Generation.ipynb) | Main notebook containing data download, preprocessing, heatmap generation, model construction, training, evaluation, and visualization. |
-| [`Heapmap_Generation.ipynb`](Heapmap_Generation.ipynb) | Additional notebook containing the heatmap-generation workflow and model experiments. |
+| [`Heatmap_Generation.ipynb`](Heatmap_Generation.ipynb) | Main notebook containing data download, preprocessing, heatmap generation, model construction, training, evaluation, and visualization. |
 
 ## Requirements
 
@@ -59,7 +78,7 @@ The notebook installs or upgrades `yfinance` and `curl_cffi` in its setup cells.
 
 ### Option 1: Google Colab
 
-1. Open [`Final_DeepLearning_Assignment.ipynb`](Heatmap_Generation.ipynb) in Google Colab.
+1. Open [`Heatmap_Generation.ipynb`](Heatmap_Generation.ipynb) in Google Colab.
 2. Select a GPU runtime, preferably a T4 or equivalent.
 3. Run the package-installation cell.
 4. Restart the runtime if requested.
@@ -130,6 +149,24 @@ Training includes:
 - Early stopping based on validation reconstruction loss
 - Learning-rate reduction when validation reconstruction loss plateaus
 
+## Results
+
+- Dataset: 1230 trading days (2021-10-08 to 2026-10-07); samples: train 856, validation 179, test 180; chronological split, window size 5
+- Model parameters: 4,079,491; trained 22 epochs with early stopping, best epoch 12
+- Test MSE (lower is better): Temporal VAE 0.0609; Training-mean baseline 0.0604; Input-average baseline 0.0692; Persistence baseline 0.1139
+- Experiments (10 epochs each, test MSE): GRU seq 3 = 0.0605, GRU seq 5 = 0.0603, GRU seq 7 = 0.0611, LSTM seq 5 = 0.0612
+- Interpretation: the model reduces MSE by about 47% versus the persistence baseline, but is only comparable to the training-mean baseline, because daily stock returns are very noisy and the model mostly learns the average market pattern.
+
+## What I Learned
+
+- This was the first deep learning project.
+- CNNs extract features from images.
+- GRUs handle sequences.
+- VAE latent space and KL loss.
+- Chronological splitting avoids leakage.
+- Early stopping.
+- Importance of baselines.
+
 ## Reproducibility
 
 The notebook sets a global seed of `42` for Python, NumPy, and TensorFlow. Results may still vary slightly across hardware, TensorFlow versions, GPU kernels, and changes in the remotely downloaded market data.
@@ -144,4 +181,4 @@ The notebook sets a global seed of `42` for Python, NumPy, and TensorFlow. Resul
 
 ## License
 
-No license is currently specified for this repository. Add a license file if you intend to define reuse, distribution, or contribution terms.
+Licensed under the MIT License.

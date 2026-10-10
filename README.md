@@ -27,15 +27,15 @@ Each 8x8 grid row is a sector (Banks, Financials, IT, Pharma, Auto, FMCG, Energy
 
 ## Pipeline
 
-![Pipeline](images/linkedin_1_pipeline.png)
+![Pipeline](images/pipeline.png)
 
 ## Sample Input Heatmaps
 
-![Sample Input Heatmaps](images/linkedin_2_input_heatmaps.png)
+![Sample Input Heatmaps](images/input_heatmaps.png)
 
 ## Training Curves
 
-![Training Curves](images/linkedin_3_training_curves.png)
+![Training Curves](images/training_curves.png)
 
 ## Model Architecture
 

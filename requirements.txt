@@ -1,0 +1,9 @@
+tensorflow
+numpy
+pandas
+matplotlib
+pillow
+yfinance
+requests
+curl_cffi
+jupyter
